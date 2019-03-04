@@ -3,7 +3,8 @@ set -e
 
 latest_release_tag() {
 	curl -s https://api.github.com/repos/arunvelsriram/docker-time-sync-agent/releases/latest \
-	| python -c "import sys, json; print json.load(sys.stdin)['tag_name']"
+	| (python -c "import sys, json; print json.load(sys.stdin)['tag_name']" ||
+	   python2 -c "import sys, json; print json.load(sys.stdin)['tag_name']")
 }
 
 echo_me() {
